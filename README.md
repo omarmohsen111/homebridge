@@ -1,128 +1,208 @@
-<p align="center">
-  <a href="https://homebridge.io"><img src="https://raw.githubusercontent.com/homebridge/branding/master/logos/homebridge-color-round-stylized.png" height="140"></a>
-</p>
+# @0x5e/homebridge-tuya-platform
 
-<span align="center">
+[![npm](https://badgen.net/npm/v/@0x5e/homebridge-tuya-platform)](https://npmjs.com/package/@0x5e/homebridge-tuya-platform)
+[![npm](https://badgen.net/npm/dt/@0x5e/homebridge-tuya-platform)](https://npmjs.com/package/@0x5e/homebridge-tuya-platform)
+[![mit-license](https://badgen.net/npm/license/@0x5e/homebridge-tuya-platform)](https://github.com/0x5e/homebridge-tuya-platform/blob/main/LICENSE)
+[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)
+[![Build and Lint](https://github.com/0x5e/homebridge-tuya-platform/actions/workflows/build.yml/badge.svg)](https://github.com/0x5e/homebridge-tuya-platform/actions/workflows/build.yml)
+[![join-discord](https://badgen.net/badge/icon/discord?icon=discord&label=homebridge/tuya)](https://discord.gg/homebridge-432663330281226270)
 
-# Homebridge
 
-<a href="https://www.npmjs.com/package/homebridge"><img title="npm version" src="https://badgen.net/npm/v/homebridge?label=stable"></a>
-<a href="https://github.com/homebridge/homebridge/wiki/Homebridge-Beta-Testing"><img title="npm version" src="https://badgen.net/npm/v/homebridge/beta?label=beta"></a>
-<a href="https://www.npmjs.com/package/homebridge"><img title="npm downloads" src="https://badgen.net/npm/dt/homebridge"></a>
+Fork version of the official Tuya Homebridge plugin, with a focus on fixing bugs and adding new device support.
 
-</span>
 
-<img src="https://media.giphy.com/media/10l79ICohTu4iQ/giphy.gif" align="right" alt="Unlocking Door">
+## Features
 
-**Homebridge** is a lightweight NodeJS server you can run on your home network that emulates the iOS HomeKit API. It supports Plugins, which are community-contributed modules that provide a basic bridge from HomeKit to various 3rd-party APIs provided by manufacturers of "smart home" devices. 
+- Optimized and improved code for better readability and maintainability.
+- Enhanced stability.
+- Reduced duplicate code.
+- Fewer API errors.
+- Lower development costs for new accessory categories.
+- Supports Tuya Scenes (Tap-to-Run).
+- Includes the ability to override device configurations, which enables support for "non-standard" DPs.
+- Supports over 60+ device categories, including most light, switch, sensor, camera, lock, IR remote control, etc.
 
-Since Siri supports devices added through HomeKit, this means that with Homebridge you can ask Siri to control devices that don't have any support for HomeKit at all. For instance, using just some of the available plugins, you can say:
 
- * _Siri, unlock the back door._ [pictured to the right]
- * _Siri, open the garage door._
- * _Siri, turn on the coffee maker._ 
- * _Siri, turn on the living room lights._
- * _Siri, good morning!_
+## Supported Tuya Devices
+See [SUPPORTED_DEVICES.md](./SUPPORTED_DEVICES.md)
 
-You can explore all available plugins at the NPM website by [searching for the keyword `homebridge-plugin`](https://www.npmjs.com/search?q=homebridge-plugin).
 
-##  Community
+## Changelogs
+See [CHANGELOG.md](./CHANGELOG.md)
 
-The official Homebridge Discord server and Reddit community are where users can discuss Homebridge and ask for help.
-
-<span align="center">
-
-[![Homebridge Discord](https://discordapp.com/api/guilds/432663330281226270/widget.png?style=banner2)](https://discord.gg/kqNCe2D) [![Homebridge Reddit](.github/homebridge-reddit.svg?sanitize=true)](https://www.reddit.com/r/homebridge/)
-
-</span>
-
-HomeKit communities can also be found on both [Discord](https://discord.gg/RcV7fa8) and [Reddit](https://www.reddit.com/r/homekit).
 
 ## Installation
+Before using this plugin, please make sure to uninstall `homebridge-tuya-platform` first as these two plugins cannot run simultaneously. However, the configuration files are compatible, so there's no need to delete them.
 
-The [Homebridge Wiki](https://github.com/homebridge/homebridge/wiki) contains step-by-step instruction on how to install Node.js and setup Homebridge and the [Homebridge UI](https://github.com/oznu/homebridge-config-ui-x) as a service so it automatically starts on boot:
-
-* [Official Homebridge Raspberry Pi Image](https://github.com/homebridge/homebridge-raspbian-image/wiki/Getting-Started)
-* [Setup Homebridge on a Raspberry Pi (Raspbian)](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Raspbian)
-* [Setup Homebridge on Debian or Ubuntu Linux](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Debian-or-Ubuntu-Linux)
-* [Setup Homebridge on Red Hat, CentOS or Fedora Linux](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Red-Hat%2C-CentOS-or-Fedora-Linux)
-* [Setup Homebridge on macOS](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-macOS)
-* [Setup Homebridge on Windows 10](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Windows-10)
-* [Setup Homebridge on Docker (Linux)](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Docker)
-* [Setup Homebridge on a Synology NAS](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Synology-DSM)
-* [Other Platforms](https://github.com/homebridge/homebridge/wiki/Other-Platforms)
-
-## Adding Homebridge to iOS
-
-1. Open the Home <img src="https://user-images.githubusercontent.com/3979615/78010622-4ea1d380-738e-11ea-8a17-e6a465eeec35.png" height="16.42px"> app on your device.
-2. Tap the Home tab, then tap <img src="https://user-images.githubusercontent.com/3979615/78010869-9aed1380-738e-11ea-9644-9f46b3633026.png" height="16.42px">.
-3. Tap *Add Accessory*, then scan the QR code shown in the Homebridge UI or your Homebridge logs.
-
-If the bridge does not have any accessories yet, you may receive a message saying *Additional Set-up Required*, this is ok, as you add plugins they will show up in the Home app without the need to pair again (except for Cameras and TVs).
-
-Cameras and most TV devices are exposed as separate accessories and each needs to be paired separately. See [this wiki article](https://github.com/homebridge/homebridge/wiki/Connecting-Homebridge-To-HomeKit#how-to-add-homebridge-cameras--tvs) for instructions.
-
-## Interacting with your Devices
-
-Once your device has been added to HomeKit, you should be able to tell Siri to control your devices. However, realize that Siri is a cloud service, and iOS may need some time to synchronize your device information with iCloud.
-
-One final thing to remember is that Siri will almost always prefer its default phrase handling over HomeKit devices. For instance, if you name your Sonos device "Radio" and try saying "Siri, turn on the Radio" then Siri will probably start playing an iTunes Radio station on your phone. Even if you name it "Sonos" and say "Siri, turn on the Sonos", Siri will probably just launch the Sonos app instead. This is why, for instance, the suggested `name` for the Sonos accessory is "Speakers".
-
-## Plugin Development
-
-The https://developers.homebridge.io website contains the Homebridge API reference, available service and characteristic types, and plugin examples.
-
-The [Homebridge Plugin Template](https://github.com/homebridge/homebridge-plugin-template) project provides a base you can use to create your own *platform* plugin.
-
-There are many existing plugins you can study; you might start with the [Homebridge Example Plugins](https://github.com/homebridge/homebridge-examples) or a plugin that already implements the device type you need.
-
-When writing your plugin, you'll want Homebridge to load it from your development directory instead of publishing it to `npm` each time. Run this command inside your plugin project folder so your global install of Homebridge can discover it:
+#### For Homebridge Web UI Users
+Go to plugin page, search for `@0x5e/homebridge-tuya-platform` and install it.
 
 
-```shell
-npm link
+#### For Homebridge Command Line Users
+
+Run the following command in the terminal:
+```
+npm install @0x5e/homebridge-tuya-platform
 ```
 
-*You can undo this using the `npm unlink` command.*
 
-Then start Homebridge in debug mode:
+## Configuration
 
-```shell
-homebridge -D
+There are two types of projects: `Custom` and `Smart Home`.
+The difference between them is:
+- The `Custom` project pulls devices from the project's assets.
+- The `Smart Home` project pulls devices from the user's home in the Tuya app.
+
+If you are a personal user and are unsure which one to choose, please use the `Smart Home` project.
+
+Before you can configure, you must go to the [Tuya IoT Platform](https://iot.tuya.com):
+- Create a cloud development project, and select the data center where your app account is located. See [Mappings Between OEM App Accounts and Data Centers](https://developer.tuya.com/en/docs/iot/oem-app-data-center-distributed?id=Kafi0ku9l07qb)
+- Go to the `Project Page` > `Devices Panel` > `Link Tuya App Account`, and link your app account.
+- Go to the `Project Page` > `Service API` > `Go to Authorize`, and subscribe to the following APIs (it is free for trial):
+    - Authorization Token Management
+    - Device Status Notification
+    - IoT Core
+    - IoT Video Live Stream (for cameras)
+    - Industry Project Client Service (for the `Custom` project)
+    - IR Control Hub Open Service (for IR devices)
+    - Smart Home Scene Linkage (for scenes)
+    - Smart Lock Open Service (for Lock devices)
+- **⚠️Remember to extend the API trial period every 6 months here [Tuya IoT Platform > Cloud > Cloud Services > IoT Core](https://iot.tuya.com/cloud/products/detail?abilityId=1442730014117204014&id=p1668587814138nv4h3n&abilityAuth=0&tab=1) (the first-time subscription only gives you 1 month).**
+
+#### For "Custom" Project
+
+- `platform` - **required** : Must be 'TuyaPlatform'
+- `options.projectType` - **required** : Must be '1'
+- `options.endpoint` - **required** : The endpoint URL taken from the [API Reference > Endpoints](https://developer.tuya.com/en/docs/iot/api-request?id=Ka4a8uuo1j4t4#title-1-Endpoints) table.
+- `options.accessId` - **required** : The Access ID obtained from [Tuya IoT Platform > Cloud Develop](https://iot.tuya.com/cloud)
+- `options.accessKey` - **required** : The Access Secret obtained from [Tuya IoT Platform > Cloud Develop](https://iot.tuya.com/cloud)
+
+#### For "Smart Home" Project
+
+- `platform` - **required** : Must be 'TuyaPlatform'
+- `options.projectType` - **required** : Must be '2'
+- `options.accessId` - **required** : The Access ID obtained from [Tuya IoT Platform > Cloud Develop](https://iot.tuya.com/cloud)
+- `options.accessKey` - **required** : The Access Secret obtained from [Tuya IoT Platform > Cloud Develop](https://iot.tuya.com/cloud)
+- `options.countryCode` - **required** : The country code of your app account's region.
+- `options.username` - **required** : The app account's username.
+- `options.password` - **required** : The app account's password. MD5 salted password is also available for increased security.
+- `options.appSchema` - **required** : The app schema: 'tuyaSmart' for the Tuya Smart App, or 'smartlife' for the Smart Life App.
+- `options.endpoint` - **optional** : The endpoint URL can be inferred from the [API Reference > Endpoints](https://developer.tuya.com/en/docs/iot/api-request?id=Ka4a8uuo1j4t4#title-1-Endpoints) table based on the country code provided. Only manually set this value if you encounter login issues and need to specify the endpoint for your account location.
+- `options.homeWhitelist` - **optional**: An array of integer values for the home IDs you want to whitelist. If provided, only devices with matching Home IDs will be included. You can find the Home ID in the homebridge log.
+
+
+#### Advanced options
+See [ADVANCED_OPTIONS.md](./ADVANCED_OPTIONS.md)
+
+
+## Limitations
+- **⚠️Don't forget to extend the API trial period every 6 months. Maybe you can set up a reminder in calendar.**
+- Using the same app account for multiple Homebridge/HomeAssistant instances is not supported. Please use separate app accounts for each instance.
+- The plugin requires an internet connection to the Tuya Cloud and does not support the LAN protocol. See [#90](https://github.com/0x5e/homebridge-tuya-platform/issues/90) for more information.
+
+## FAQ
+
+#### About Login issue
+
+For most users, you can easily find your app account's data center through the [documentation](https://developer.tuya.com/en/docs/iot/oem-app-data-center-distributed?id=Kafi0ku9l07qb) and login without any issues. However, for some users, they may encounter error codes such as 1106 or 2406. If you encounter such errors, it's possible that there are differences between your data center and the documentation.
+
+To determine the data center, follow these steps:
+
+1. Open the app and navigate to "Me > Settings > Network Diagnosis".
+2. Start the diagnosis and select "Upload Log > Copy the Log to Clipboard".
+3. Paste the log anywhere and find the line beginning with "Region code:".
+4. Look for the following codes: "AY" for China, "AZ" for the West US, "EU" for Central Europe, and "IN" for India.
+
+Then manually specify endpoint in the plugin config.
+
+
+#### What is "Standard DP" and "Non-standard DP"?
+
+<!-- If your device is working properly, you don't need to know this. -->
+
+"Standard DP" refers to device properties or functionalities that are specified in the Tuya IoT Development Platform documentation at [Tuya IoT Development Platform Documentation > Cloud Development > Standard Instruction Set](https://developer.tuya.com/en/docs/iot/standarddescription?id=K9i5ql6waswzq).
+
+For example, a light bulb should have a standard DP code of `switch_led` for power on/off, and optional codes `bright_value`/`bright_value_v2` for brightness, `temp_value`/`temp_value_v2` for color temperature, and `work_mode` for changing the working mode. These codes can be found in the above documentation.
+
+If your light bulb can be adjusted in the Tuya app but not with the plugin, it most likely has "Non-standard DP."
+
+
+#### Can "Non-standard DP" be supportd by this plugin?
+
+Yes. The device must be listed in the support list and the following steps must be completed before it will work:
+1. Change the device's control mode on the Tuya Platform:
+  - Go to "[Tuya Platform Cloud Development](https://iot.tuya.com/cloud/) > Your Project > Devices > All Devices > View Devices by Product".
+  - Find the product related to your device, click the "pencil" icon (Change Control Instruction Mode).
+  - <img width="500" alt="image" src="https://user-images.githubusercontent.com/5144674/202967707-8b934e05-36d6-4b42-bb7b-87e5b24474c4.png">
+  - In the "Table of Instructions", you can see the cloud mapping and determine which DP codes are missing and need to be manually mapped later.
+  - <img width="500" alt="image" src="https://user-images.githubusercontent.com/5144674/202967528-4838f9a1-0547-4102-afbb-180dc9b198b1.png">
+  - Select "DP Instruction" and save.
+2. Override the device schema, see [ADVANCED_OPTIONS.md](./ADVANCED_OPTIONS.md).
+
+
+#### Local support
+See [#90](https://github.com/0x5e/homebridge-tuya-platform/issues/90).
+
+Although the plugin didn't implemented tuya local protocol now, it still remains possibility in the future.
+
+
+## Troubleshooting
+
+If your device is not supported, please follow these steps to collect information.
+
+#### 1. Get Device Information
+
+After Homebridge has been successfully launched, the device information list will be saved in Homebridge's persist path. You can find the file path in the Homebridge log:
+```
+[2022/11/3 18:37:43] [TuyaPlatform] Device list saved at /path/to/TuyaDeviceList.{uid}.json
 ```
 
-This will start up Homebridge and load your in-development plugin. Note that you can also direct Homebridge to load your configuration from somewhere besides the default `~/.homebridge`, for example:
+**⚠️Please make sure to remove sensitive information such as `ip`, `lon`, `lat`, `local_key`, and `uid` before submitting the file.**
 
-```shell
-homebridge -D -U ~/.homebridge-dev
+
+#### 2. Enable Homebridge Debug Mode
+
+For Homebridge Web UI users:
+- Go to the `Homebridge Setting` page
+- Turn on the `Homebridge Debug Mode -D` switch
+- Restart Homebridge.
+
+For Homebridge Command Line Users:
+- Start Homebridge with the `-D` flag: `homebridge -D`
+
+#### 3. Collect Logs
+
+With debug mode enabled, you can now receive MQTT logs. Operate your device, either physically or through the Tuya App, to receive MQTT logs like this:
+
+```
+[2022/12/8 12:51:59] [TuyaPlatform] [TuyaOpenMQ] onMessage:
+topic = cloud/token/in/xxx
+protocol = 4
+message = {
+  "dataId": "xxx",
+  "devId": "xxx",
+  "productKey": "xxx",
+  "status": [
+    {
+      "1": "double_click",
+      "code": "switch1_value",
+      "t": "1670475119766",
+      "value": "double_click"
+    }
+  ]
+}
 ```
 
-This is very useful when you are already using your development machine to host a "real" Homebridge instance (with all your accessories) that you don't want to disturb.
+If you are unable to receive any MQTT logs while controlling the device, it likely means that your device has "Non-standard DP".
 
-## Common Issues
+By submitting the device information JSON and MQTT logs, you can help us support new device categories.
 
-### Home App Says Accessory Already Added
 
-To fix this, [Reset Homebridge](https://github.com/homebridge/homebridge/wiki/Connecting-Homebridge-To-HomeKit#how-to-reset-homebridge).
+## Contributing
 
-### My iOS App Can't Find Homebridge
+Please see https://github.com/homebridge/homebridge-plugin-template#setup-development-environment for setup development environment.
 
-Try the following:
+PRs and issues are welcome.
 
-  1. Swap between the `Bonjour HAP` and `Ciao` mDNS Advertiser options. See [the wiki](https://github.com/homebridge/homebridge/wiki/mDNS-Options) for more details.
-  2. iOS DNS cache has gone stale or gotten misconfigured. To fix this, turn airplane mode on and back off to flush the DNS cache. 
-
-### Limitations
-
- * One bridge can only expose 150 accessories due to a HomeKit limit. You can however run your plugins as a [Child Bridge](https://github.com/homebridge/homebridge/wiki/Child-Bridges) or run [Multiple Homebridge Instances](https://github.com/oznu/homebridge-config-ui-x/wiki/Homebridge-Service-Command#multiple-instances) to get around this limitation.
- * Once an accessory has been added to the Home app, changing its name via Homebridge won't be automatically reflected in iOS. You must change it via the Home app as well.
-
-## Why Homebridge?
-
-Technically, the device manufacturers should be the ones implementing the HomeKit API. And I'm sure they will - eventually. When they do, this project will be obsolete, and I hope that happens soon. In the meantime, Homebridge is a fun way to get a taste of the future, for those who just can't bear to wait until "real" HomeKit devices are on the market.
-
-## Credit
-
-Homebridge was originally created by [Nick Farina](https://twitter.com/nfarina).
-
-The original HomeKit API work was done by [Khaos Tian](https://twitter.com/khaost) in his [HAP-NodeJS](https://github.com/homebridge/HAP-NodeJS) project.
+# 
+Thank you for spend time using the project. If it helps you, don't hesitate to give it a star 🌟:-)

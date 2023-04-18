@@ -1,9 +1,5 @@
-/* eslint-disable */
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
-    preset: "ts-jest",
-    testEnvironment: "node",
-    coverageReporters: ["lcov"],
-    collectCoverageFrom: [
-        "src/**"
-    ],
+  preset: 'ts-jest',
+  testEnvironment: 'node',
 };

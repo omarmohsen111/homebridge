@@ -1,11 +1,12 @@
-{
+sudo hb-service update-node {
   "watch": [
     "src"
   ],
   "ext": "ts",
-  "ignore": [
-    "src/**/*.spec.ts"
-  ],
-  "exec": "tsc && bin/homebridge -I -C",
-  "signal": "SIGTERM"
+  "ignore": [],
+  "exec": "tsc && homebridge -I -D",
+  "signal": "SIGTERM",
+  "env": {
+    "NODE_OPTIONS": "--trace-warnings"
+  }
 }
